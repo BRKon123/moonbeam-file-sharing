@@ -2,7 +2,7 @@ const { ethers } = require("hardhat");
 
 async function main() {
   const [deployer] = await ethers.getSigners();
-  const contractAddress = "0xcA2a0C49C6197eFd002991d8bf830ef3A37F93Fc"; // Replace with your contract address
+  const contractAddress = "0x00F11bFABfe57284f0b87ff3042cEE0634586E73"; // Replace with your contract address
   const Contract = await ethers.getContractFactory("FileSharing");
   const contract = Contract.attach(contractAddress);
 
