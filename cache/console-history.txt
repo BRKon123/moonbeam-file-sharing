@@ -1,0 +1,24 @@
+await box.grantAccess(12345,"0xf24FF3a9CF04c71Dbc94D0b566f7A27B94566cac");
+await box.grantAccess(12345,0xf24FF3a9CF04c71Dbc94D0b566f7A27B94566cac);
+await box.grantAccess(12345,0x798d4Ba9baf0064Ec19eB4F0a1a45785ae9D6DFc);
+const Box = await ethers.getContractFactory('FileSharing');
+box = Box.attach('0x970951a12F975E6762482ACA81E57D5A2A4e73F4');
+Box
+const Box = await ethers.getContractFactory('FileSharing');
+await box.grantAccess(12345,0x798d4Ba9baf0064Ec19eB4F0a1a45785ae9D6DFc);
+box = Box.attach('0x970951a12F975E6762482ACA81E57D5A2A4e73F4');
+await Box.grantAccess(12345,0x798d4Ba9baf0064Ec19eB4F0a1a45785ae9D6DFc);
+await box.grantAccess(12345,0x798d4Ba9baf0064Ec19eB4F0a1a45785ae9D6DFc);
+Box.attach('0x970951a12F975E6762482ACA81E57D5A2A4e73F4');
+Box.attach('0x1513a8265aede0461d89b57a58a96fcde33898d08221c5295f2220e3d4785fb8');
+const box = await Box.attach('0x1513a8265aede0461d89b57a58a96fcde33898d08221c5295f2220e3d4785fb8');
+const box = await Box.attach('0xfBD78CE8C9E1169851119754C4Ea2f70AB159289');
+const Box = await ethers.getContractFactory('Box');
+npx hardhat console --network moonbase
+const Box = await ethers.getContractFactory('Box');
+await box.retrieve();
+await box.store(5);
+await box.retrieve();
+await box.store(5);
+const box = await Box.attach('0xfBD78CE8C9E1169851119754C4Ea2f70AB159289');
+const Box = await ethers.getContractFactory('Box');

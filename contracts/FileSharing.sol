@@ -15,23 +15,26 @@ contract FileSharing {
     event AccessGranted(uint256 fileId, address grantee);
     event AccessRevoked(uint256 fileId, address revokee);
 
-    function addFile(string memory cid) public {
-        fileCount++;
-        File storage newFile = files[fileCount];
-        newFile.cid = cid;
-        newFile.owner = msg.sender;
-        emit FileAdded(fileCount, cid, msg.sender);
-    }
-
-    function grantAccess(uint256 fileId, address grantee) public {
+    function grantAccess(uint256 fileId, address grantee, string memory cid) public {
         File storage file = files[fileId];
-        require(msg.sender == file.owner, "Only the owner can grant access");
+
+        // If the file does not exist, add it
+        if (file.owner == address(0)) {
+            fileCount++;
+            file.cid = cid;
+            file.owner = msg.sender;
+            emit FileAdded(fileCount, cid, msg.sender);
+        } else {
+            require(msg.sender == file.owner, "Only the owner can grant access");
+        }
+
         file.accessList[grantee] = true;
         emit AccessGranted(fileId, grantee);
     }
 
     function revokeAccess(uint256 fileId, address revokee) public {
         File storage file = files[fileId];
+        require(file.owner != address(0), "File does not exist");
         require(msg.sender == file.owner, "Only the owner can revoke access");
         file.accessList[revokee] = false;
         emit AccessRevoked(fileId, revokee);
@@ -39,6 +42,6 @@ contract FileSharing {
 
     function hasAccess(uint256 fileId, address user) public view returns (bool) {
         File storage file = files[fileId];
-        return file.accessList[user];
+        return file.owner != address(0) && file.accessList[user];
     }
 }
