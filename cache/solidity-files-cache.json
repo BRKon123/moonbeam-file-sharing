@@ -38,8 +38,8 @@
       ]
     },
     "/Users/rutkon/Documents/Projects/moonbeam-file-sharing/contracts/FileSharing.sol": {
-      "lastModificationDate": 1721526865838,
-      "contentHash": "5ea2a0d5fad13abbb1efb827feb607ef",
+      "lastModificationDate": 1721532810320,
+      "contentHash": "2b976708c7865edc4bdf61e3b03d3e4b",
       "sourceName": "contracts/FileSharing.sol",
       "solcConfig": {
         "version": "0.8.20",
