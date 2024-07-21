@@ -2,7 +2,7 @@ const { ethers } = require("hardhat");
 
 async function main() {
   const [deployer] = await ethers.getSigners();
-  const contractAddress = "0xYourContractAddressHere"; // Replace with your contract address
+  const contractAddress = "0xcA2a0C49C6197eFd002991d8bf830ef3A37F93Fc"; // Replace with your contract address
   const Contract = await ethers.getContractFactory("FileSharing");
   const contract = Contract.attach(contractAddress);
 
@@ -14,14 +14,14 @@ async function main() {
   await contract.grantAccess(fileId, granteeAddress, cid, encryptedKey);
   console.log(`Access granted to ${granteeAddress} for fileId ${fileId}`);
 
-  const hasAccess = await contract.hasAccess(fileId, granteeAddress);
-  console.log(`Grantee has access: ${hasAccess}`);
+  const userFiles = await contract.getUserFiles(granteeAddress);
+  console.log(`Files accessible by ${granteeAddress}: ${userFiles}`);
 
   const key = await contract.getEncryptedKey(fileId, granteeAddress);
   console.log(`Encrypted key for grantee: ${key}`);
 
-  const userFiles = await contract.getUserFiles(granteeAddress);
-  console.log(`Files accessible by ${granteeAddress}: ${userFiles}`);
+  const hasAccess = await contract.hasAccess(fileId, granteeAddress);
+  console.log(`Grantee has access: ${hasAccess}`);
 }
 
 main()

@@ -53,19 +53,19 @@ contract FileSharing {
         emit AccessRevoked(fileId, revokee);
     }
 
-    function hasAccess(uint256 fileId, address user) public view returns (bool) {
+    function hasAccess(uint256 fileId, address user) public returns (bool) {
         File storage file = files[fileId];
         return file.owner != address(0) && bytes(file.accessList[user]).length > 0;
     }
 
-    function getEncryptedKey(uint256 fileId, address user) public view returns (string memory) {
+    function getEncryptedKey(uint256 fileId, address user) public returns (string memory) {
         File storage file = files[fileId];
         require(file.owner != address(0), "File does not exist");
         require(bytes(file.accessList[user]).length > 0, "No access for this user");
         return file.accessList[user];
     }
 
-    function getUserFiles(address user) public view returns (uint256[] memory) {
+    function getUserFiles(address user) public returns (uint256[] memory) {
         return userFiles[user];
     }
 }
