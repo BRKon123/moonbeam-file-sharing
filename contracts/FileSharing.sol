@@ -9,6 +9,7 @@ contract FileSharing {
     }
 
     mapping(uint256 => File) public files;
+    mapping(address => uint256[]) private userFiles; // Mapping from address to list of file IDs
     uint256 public fileCount;
 
     event FileAdded(uint256 fileId, string cid, address owner);
@@ -29,6 +30,7 @@ contract FileSharing {
         }
 
         file.accessList[grantee] = encryptedKey;
+        userFiles[grantee].push(fileId); // Add file ID to user's access list
         emit AccessGranted(fileId, grantee, encryptedKey);
     }
 
@@ -37,6 +39,17 @@ contract FileSharing {
         require(file.owner != address(0), "File does not exist");
         require(msg.sender == file.owner, "Only the owner can revoke access");
         delete file.accessList[revokee];
+
+        // Remove file ID from user's access list
+        uint256[] storage fileList = userFiles[revokee];
+        for (uint256 i = 0; i < fileList.length; i++) {
+            if (fileList[i] == fileId) {
+                fileList[i] = fileList[fileList.length - 1];
+                fileList.pop();
+                break;
+            }
+        }
+
         emit AccessRevoked(fileId, revokee);
     }
 
@@ -51,4 +64,9 @@ contract FileSharing {
         require(bytes(file.accessList[user]).length > 0, "No access for this user");
         return file.accessList[user];
     }
+
+    function getUserFiles(address user) public view returns (uint256[] memory) {
+        return userFiles[user];
+    }
 }
+
